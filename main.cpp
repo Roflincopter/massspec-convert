@@ -5,6 +5,7 @@
 #include <boost/program_options.hpp>
 
 #include <string>
+#include <iostream>
 
 int main(int argc, char* argv[])
 {
