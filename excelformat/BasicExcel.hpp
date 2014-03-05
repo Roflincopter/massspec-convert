@@ -89,11 +89,6 @@
 
 #else	// newer Microsoft compilers
 
-#ifdef __MINGW32__
-#include <malloc.h>
-#include <windef.h>
-#endif
-
 #define LONGINT long long
 #define LONGINT_CONST(x) x##LL
 #define COMPOUNDFILE CompoundFile::
@@ -117,9 +112,14 @@ typedef unsigned long	DWORD;	// 32 bit unsigned integer
 typedef long			LONG;	// 32 bit signed integer
 typedef unsigned long	ULONG;	// 32 bit unsigned integer
 #else
-//typedef unsigned int	DWORD;	// 32 bit unsigned integer
-//typedef int				LONG;	// 32 bit signed integer
-//typedef unsigned int	ULONG;	// 32 bit unsigned integer
+#ifndef __MINGW32__
+typedef unsigned int	DWORD;	// 32 bit unsigned integer
+typedef int				LONG;	// 32 bit signed integer
+typedef unsigned int	ULONG;	// 32 bit unsigned integer
+#else
+#include <malloc.h>
+#include <windef.h>
+#endif
 #endif
 
 typedef short	OFFSET;
