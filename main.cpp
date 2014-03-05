@@ -11,7 +11,7 @@ int main(int argc, char* argv[])
 {
 	boost::program_options::options_description desc("Main options");
 	desc.add_options()
-		("help", "produce this help message")
+		("help,h", "produce this help message")
 		("input,i", boost::program_options::value<std::string>(), "The ascii measurement files")
 		("output,o", boost::program_options::value<std::string>(), "The output xls file")
 		("measurements,m", boost::program_options::value<std::vector<MeasurementBound>>()->multitoken(), "The measurement partitions with name and bounds");
@@ -19,6 +19,11 @@ int main(int argc, char* argv[])
 	boost::program_options::variables_map vm;
 	boost::program_options::store(boost::program_options::command_line_parser(argc, argv).options(desc).run(), vm);
 	boost::program_options::notify(vm);
+	
+	if (vm.count("help")) {
+		std::cout << desc << std::endl;
+		return 0;
+	}
 	
 	if (!vm.count("input")) {
 		std::cerr << "No input file was specified, use \"--input\"." << std::endl;
