@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ConvertDialog</class>
+ <widget class="QDialog" name="ConvertDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QDialogButtonBox" name="buttonBox">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>240</y>
+     <width>341</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   </property>
+  </widget>
+  <widget class="QWidget" name="verticalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>9</x>
+     <y>9</y>
+     <width>381</width>
+     <height>221</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="input_file_label">
+      <property name="text">
+       <string>Input File:</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLineEdit" name="input_file_name"/>
+      </item>
+      <item>
+       <widget class="QToolButton" name="browse_input">
+        <property name="toolTip">
+         <string>Browse for the input file.</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QLabel" name="output_file_label">
+      <property name="text">
+       <string>Output xls:</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLineEdit" name="output_file_name"/>
+      </item>
+      <item>
+       <widget class="QToolButton" name="browse_output">
+        <property name="toolTip">
+         <string>Browse for the output file.</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QLabel" name="bounds_label">
+      <property name="text">
+       <string>MeasurementBounds</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QListWidget" name="bounds"/>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item alignment="Qt::AlignTop">
+         <widget class="QToolButton" name="add">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="palette">
+           <palette>
+            <active>
+             <colorrole role="Text">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
+                <red>0</red>
+                <green>0</green>
+                <blue>0</blue>
+               </color>
+              </brush>
+             </colorrole>
+             <colorrole role="ButtonText">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
+                <red>11</red>
+                <green>104</green>
+                <blue>0</blue>
+               </color>
+              </brush>
+             </colorrole>
+            </active>
+            <inactive>
+             <colorrole role="Text">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
+                <red>0</red>
+                <green>0</green>
+                <blue>0</blue>
+               </color>
+              </brush>
+             </colorrole>
+             <colorrole role="ButtonText">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
+                <red>11</red>
+                <green>104</green>
+                <blue>0</blue>
+               </color>
+              </brush>
+             </colorrole>
+            </inactive>
+            <disabled>
+             <colorrole role="Text">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
+                <red>190</red>
+                <green>190</green>
+                <blue>190</blue>
+               </color>
+              </brush>
+             </colorrole>
+             <colorrole role="ButtonText">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
+                <red>190</red>
+                <green>190</green>
+                <blue>190</blue>
+               </color>
+              </brush>
+             </colorrole>
+            </disabled>
+           </palette>
+          </property>
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="toolTip">
+           <string>Add bounds to the converter.</string>
+          </property>
+          <property name="text">
+           <string>+</string>
+          </property>
+          <property name="toolButtonStyle">
+           <enum>Qt::ToolButtonTextOnly</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="edit">
+          <property name="toolTip">
+           <string>Edit bound for the converter.</string>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+         </widget>
+        </item>
+        <item alignment="Qt::AlignTop">
+         <widget class="QToolButton" name="remove">
+          <property name="toolTip">
+           <string>Remove bounds for the converter</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <zorder>buttonBox</zorder>
+  <zorder>verticalLayoutWidget</zorder>
+  <zorder>horizontalLayoutWidget_3</zorder>
+ </widget>
+ <tabstops>
+  <tabstop>input_file_name</tabstop>
+  <tabstop>output_file_name</tabstop>
+  <tabstop>bounds</tabstop>
+  <tabstop>browse_output</tabstop>
+  <tabstop>browse_input</tabstop>
+  <tabstop>add</tabstop>
+  <tabstop>remove</tabstop>
+  <tabstop>edit</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>ConvertDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>ConvertDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>browse_input</sender>
+   <signal>clicked()</signal>
+   <receiver>ConvertDialog</receiver>
+   <slot>browse_input()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>375</x>
+     <y>43</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>browse_output</sender>
+   <signal>clicked()</signal>
+   <receiver>ConvertDialog</receiver>
+   <slot>browse_output()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>375</x>
+     <y>95</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bounds</sender>
+   <signal>itemSelectionChanged()</signal>
+   <receiver>ConvertDialog</receiver>
+   <slot>selection_changed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>181</x>
+     <y>181</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>add</sender>
+   <signal>clicked()</signal>
+   <receiver>ConvertDialog</receiver>
+   <slot>add_pressed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>370</x>
+     <y>147</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>edit</sender>
+   <signal>clicked()</signal>
+   <receiver>ConvertDialog</receiver>
+   <slot>edit_pressed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>372</x>
+     <y>181</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>remove</sender>
+   <signal>clicked()</signal>
+   <receiver>ConvertDialog</receiver>
+   <slot>delete_pressed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>370</x>
+     <y>210</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>browse_input()</slot>
+  <slot>browse_output()</slot>
+  <slot>selection_changed()</slot>
+  <slot>add_pressed()</slot>
+  <slot>edit_pressed()</slot>
+  <slot>delete_pressed()</slot>
+ </slots>
+</ui>

@@ -4,6 +4,8 @@
 
 #include "excelformat/BasicExcel.hpp"
 
+#include <QApplication>
+
 #include <boost/filesystem.hpp>
 #include <sstream>
 

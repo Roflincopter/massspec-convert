@@ -1,11 +1,21 @@
 
+#include "gui/convertdialog.hpp"
+
 #include "MeasurementBound.hpp"
 #include "MeasurementXlsWriter.hpp"
 
 #include <boost/program_options.hpp>
 
+#include <QApplication>
+#include <QtPlugin>
+
+#if defined(_WIN32) || defined(_WIN64)
+	Q_IMPORT_PLUGIN (QWindowsIntegrationPlugin);
+#endif //defined(_WIN32) || defined(_WIN64)
+
 #include <string>
 #include <iostream>
+#include <memory>
 
 int main(int argc, char* argv[])
 {
@@ -25,19 +35,26 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 	
-	if (!vm.count("input")) {
-		std::cerr << "No input file was specified, use \"--input\"." << std::endl;
-		return 1;
+	std::unique_ptr<MeasurementXlsWriter> xlswriter{nullptr};
+	
+	if (!vm.count("input") || !vm.count("output")) {
+		int fake_argc = 0;
+		QApplication qapp(fake_argc, nullptr);
+		
+		ConvertDialog dialog;
+		int exit = dialog.exec();
+		
+		if(exit == QDialog::Accepted) {
+			xlswriter = std::unique_ptr<MeasurementXlsWriter>(new MeasurementXlsWriter(dialog.get_input_file_name(), dialog.get_output_file_name(), dialog.get_bounds()));
+		} else {
+			return 0;
+		}
+	} else {
+		xlswriter = std::unique_ptr<MeasurementXlsWriter>(new MeasurementXlsWriter(vm["input"].as<std::string>(), vm["output"].as<std::string>(), vm["measurements"].as<std::vector<MeasurementBound>>()));
 	}
 	
-	if (!vm.count("output")) {
-		std::cerr << "No output file was specified, use \"--output\"." << std::endl;
-		return 2;
-	}
-	
-	MeasurementXlsWriter xlswriter(vm["input"].as<std::string>(), vm["output"].as<std::string>(), vm["measurements"].as<std::vector<MeasurementBound>>());
 	try {
-		xlswriter.run();
+		xlswriter->run();
 	} catch(std::runtime_error e) {
 		std::cerr << e.what() << std::endl;
 		return 3;
