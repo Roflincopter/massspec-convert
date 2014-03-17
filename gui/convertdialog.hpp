@@ -13,10 +13,9 @@ public:
 	explicit ConvertDialog(QWidget *parent = 0);
 	
 	std::string get_input_file_name();
-	
 	std::string get_output_file_name();
-	
 	std::vector<MeasurementBound> get_bounds();
+	double get_interval();
 	
 private:
 	Ui::ConvertDialog ui;

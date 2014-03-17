@@ -20,10 +20,11 @@ std::ostream& operator<<(std::ostream& os, const MeasurementXlsWriter::Row& row)
 }
 
 
-MeasurementXlsWriter::MeasurementXlsWriter(std::string input_file, std::string output_file, std::vector<MeasurementBound> bounds)
+MeasurementXlsWriter::MeasurementXlsWriter(std::string input_file, std::string output_file, std::vector<MeasurementBound> bounds, double measurement_group_interval)
     : input_file(input_file)
     , output_file(output_file)
     , bounds(bounds)
+    , measurement_group_interval(measurement_group_interval)
 {
 	if(!boost::filesystem::is_regular_file(input_file)) {
 		throw std::runtime_error("File: " + input_file + " Does not exist.");
@@ -85,12 +86,18 @@ MeasurementXlsWriter::Row MeasurementXlsWriter::get_row(std::istream& is)
 	return {reltime, data};
 }
 
-
 bool MeasurementXlsWriter::get_worksheet(double reltime, int& worksheet)
 {
-	for(int i = 0; i < bounds.size(); ++i)
-	{
-		if(bounds[i].contains(reltime)) {
+	/* For when the interval is always the max upper_bound.
+	auto comp = [](MeasurementBound const& lh, MeasurementBound const& rh)
+		{
+			return lh.upper_bound < rh.upper_bound;
+		};
+	
+	double max_upper_bound = std::max_element(bounds.cbegin(), bounds.cend(), comp)->upper_bound;
+	*/
+	for(int i = 0; i < bounds.size(); ++i) {
+		if(bounds[i].contains(fmod(reltime, measurement_group_interval))) {
 			worksheet = i;
 			return true;
 		}
@@ -130,8 +137,7 @@ void MeasurementXlsWriter::run()
 		YExcel::BasicExcelCell* cell = sheet->Cell(rows[worksheet],0);
 		cell->SetDouble(row.reltime);
 		
-		for(int i = 1; i <= row.values.size(); ++i)
-		{
+		for(int i = 1; i <= row.values.size(); ++i) {
 			cell = sheet->Cell(rows[worksheet],i);
 			cell->SetDouble(row.values[i-1]);
 		}

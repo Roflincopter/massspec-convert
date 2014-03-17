@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>332</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>240</y>
+     <y>290</y>
      <width>341</width>
      <height>32</height>
     </rect>
@@ -35,7 +35,7 @@
      <x>9</x>
      <y>9</y>
      <width>381</width>
-     <height>221</height>
+     <height>271</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -213,22 +213,30 @@
       </item>
      </layout>
     </item>
+    <item>
+     <widget class="QLabel" name="interval_label">
+      <property name="text">
+       <string>Measurements interval</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="interval"/>
+    </item>
    </layout>
   </widget>
-  <zorder>buttonBox</zorder>
-  <zorder>verticalLayoutWidget</zorder>
-  <zorder>horizontalLayoutWidget_3</zorder>
  </widget>
  <tabstops>
   <tabstop>input_file_name</tabstop>
   <tabstop>output_file_name</tabstop>
   <tabstop>bounds</tabstop>
-  <tabstop>browse_output</tabstop>
-  <tabstop>browse_input</tabstop>
-  <tabstop>add</tabstop>
-  <tabstop>remove</tabstop>
-  <tabstop>edit</tabstop>
+  <tabstop>interval</tabstop>
   <tabstop>buttonBox</tabstop>
+  <tabstop>browse_input</tabstop>
+  <tabstop>browse_output</tabstop>
+  <tabstop>add</tabstop>
+  <tabstop>edit</tabstop>
+  <tabstop>remove</tabstop>
  </tabstops>
  <resources/>
  <connections>

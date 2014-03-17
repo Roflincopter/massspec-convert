@@ -24,6 +24,7 @@ int main(int argc, char* argv[])
 		("help,h", "produce this help message")
 		("input,i", boost::program_options::value<std::string>(), "The ascii measurement files")
 		("output,o", boost::program_options::value<std::string>(), "The output xls file")
+		("interval,n", boost::program_options::value<double>(), "The interval in which 2 measurement groups are taken.")
 		("measurements,m", boost::program_options::value<std::vector<MeasurementBound>>()->multitoken(), "The measurement partitions with name and bounds");
 	
 	boost::program_options::variables_map vm;
@@ -45,12 +46,22 @@ int main(int argc, char* argv[])
 		int exit = dialog.exec();
 		
 		if(exit == QDialog::Accepted) {
-			xlswriter = std::unique_ptr<MeasurementXlsWriter>(new MeasurementXlsWriter(dialog.get_input_file_name(), dialog.get_output_file_name(), dialog.get_bounds()));
+			xlswriter = std::unique_ptr<MeasurementXlsWriter>(new MeasurementXlsWriter(
+				dialog.get_input_file_name(),
+				dialog.get_output_file_name(),
+				dialog.get_bounds(),
+				dialog.get_interval())
+			);
 		} else {
 			return 0;
 		}
 	} else {
-		xlswriter = std::unique_ptr<MeasurementXlsWriter>(new MeasurementXlsWriter(vm["input"].as<std::string>(), vm["output"].as<std::string>(), vm["measurements"].as<std::vector<MeasurementBound>>()));
+		xlswriter = std::unique_ptr<MeasurementXlsWriter>(new MeasurementXlsWriter(
+			vm["input"].as<std::string>(),
+			vm["output"].as<std::string>(),
+			vm["measurements"].as<std::vector<MeasurementBound>>(),
+			vm["interval"].as<double>())
+		);
 	}
 	
 	try {

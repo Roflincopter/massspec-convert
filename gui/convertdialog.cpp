@@ -20,6 +20,9 @@ QDialog(parent)
 	
 	ui.edit->setEnabled(!ui.bounds->selectedItems().empty());
 	ui.remove->setEnabled(!ui.bounds->selectedItems().empty());
+	
+	QValidator* interval = new QDoubleValidator(this);
+	ui.interval->setValidator(interval);
 }
 
 std::string ConvertDialog::get_input_file_name()
@@ -40,6 +43,11 @@ std::vector<MeasurementBound> ConvertDialog::get_bounds()
 		vec.push_back(ui.bounds->item(i)->data(Qt::UserRole).value<MeasurementBound>());
 	}
 	return vec;
+}
+
+double ConvertDialog::get_interval()
+{
+	return ui.interval->text().toDouble();
 }
 
 void ConvertDialog::browse_input()
