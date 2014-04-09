@@ -81,6 +81,16 @@ void ConvertDialog::add_pressed()
 		item->setData(Qt::UserRole, var);
 		
 		ui.bounds->addItem(item);
+		
+		uint32_t max_upper_bound = std::numeric_limits<uint32_t>::min();
+		for(int i = 0; i < ui.bounds->count(); ++i)
+		{
+			auto ub = ui.bounds->item(i)->data(Qt::UserRole).value<MeasurementBound>().upper_bound;
+			max_upper_bound = ub > max_upper_bound ? ub : max_upper_bound;
+		}
+		if(max_upper_bound > ui.interval->text().toInt()) {
+			ui.interval->setText(QString::number(max_upper_bound));
+		}
 	}
 }
 
